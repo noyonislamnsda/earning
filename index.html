@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banner Card Generator System</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #eef2f5;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* Form Styles */
+    .form-card {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 420px;
+    }
+    .form-card h2 {
+      margin-bottom: 20px;
+      color: #0b5e34;
+      font-size: 20px;
+      border-bottom: 2px solid #0b5e34;
+      padding-bottom: 8px;
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #333;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+    }
+    .form-group input:focus {
+      border-color: #0b5e34;
+    }
+
+    /* Download Button */
+    .download-btn {
+      width: 100%;
+      background: #cc0000;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.3s ease;
+    }
+    .download-btn:hover {
+      background: #aa0000;
+    }
+
+    /* Banner Card Preview */
+    .banner-preview {
+      background: #ffffff;
+      width: 500px;
+      min-height: 720px;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 6px solid #0b5e34;
+    }
+
+    /* Banner Header (Original Logos) */
+    .banner-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px 10px 30px;
+    }
+    .logo-top-left, .logo-top-right {
+      height: 65px;
+      object-fit: contain;
+    }
+
+    /* Main Title */
+    .title-box {
+      text-align: center;
+      padding: 10px 20px 0;
+    }
+    .title-sub {
+      color: #0b5e34;
+      font-size: 17px;
+      font-weight: bold;
+    }
+    .title-main {
+      color: #cc0000;
+      font-size: 22px;
+      font-weight: 800;
+      margin: 4px 0;
+    }
+    .title-project {
+      color: #cc0000;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    /* Branch Ribbon */
+    .branch-ribbon {
+      background: #004d26;
+      color: #ffffff;
+      text-align: center;
+      padding: 8px 0;
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-size: 14px;
+      margin: 15px 40px;
+      clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+    }
+
+    /* Info & Photo Grid */
+    .banner-body {
+      display: flex;
+      padding: 10px 30px;
+      gap: 20px;
+    }
+    .info-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .info-item {
+      border-bottom: 1px dashed #d1d1d1;
+      padding-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .info-icon {
+      width: 24px;
+      height: 24px;
+      background: #e8f5e9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #4caf50;
+      flex-shrink: 0;
+    }
+    .info-icon img {
+      width: 14px;
+      height: 14px;
+    }
+    .info-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .info-label {
+      font-size: 10px;
+      color: #777;
+    }
+    .info-value {
+      font-size: 14px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* Profile Photo Frame - Image auto adjustment */
+    .photo-frame {
+      width: 170px;
+      height: 220px;
+      border: 2px solid #0b5e34;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;         /* Fills the container perfectly */
+      object-position: top center; /* Keeps face/head in view */
+    }
+
+    /* Footer Partners (Original Logos) */
+    .banner-footer {
+      background: #ffffff;
+      border-top: 2px solid #eef2f5;
+      padding-top: 15px;
+    }
+    .partner-logos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px 15px 30px;
+    }
+    .partner-logos img {
+      height: 40px;
+      object-fit: contain;
+    }
+
+    /* Bottom Branch Ribbon */
+    .bottom-bar {
+      background: #004d26;
+      color: #ffffff;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      font-size: 13px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .bottom-bar img {
+      height: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-card">
+    <h2>ব্যক্তিগত ও অর্জনের তথ্য</h2>
+
+    <div class="form-group">
+      <label>শাখা (Branch Name):</label>
+      <input type="text" id="inputBranch" value="LALMONIRHAT BRANCH">
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number:</label>
+      <input type="text" id="inputPhone" value="+8801577724202">
+    </div>
+
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" id="inputName" value="HAKIMUL ISLAM">
+    </div>
+
+    <div class="form-group">
+      <label>Total Earned:</label>
+      <input type="text" id="inputEarned" value="$30 USD">
+    </div>
+
+    <div class="form-group">
+      <label>Status:</label>
+      <input type="text" id="inputStatus" value="Verified Earning">
+    </div>
+
+    <div class="form-group">
+      <label>Platform:</label>
+      <input type="text" id="inputPlatform" value="fiverr.com">
+    </div>
+
+    <div class="form-group">
+      <label>Batch no:</label>
+      <input type="text" id="inputBatch" value="August 24, 2026">
+    </div>
+
+    <div class="form-group">
+      <label>Achievement:</label>
+      <input type="text" id="inputAchievement" value="AI character generated">
+    </div>
+
+    <div class="form-group">
+      <label>Profile Image Upload (Auto Adjust):</label>
+      <input type="file" id="inputImage" accept="image/*">
+    </div>
+
+    <button class="download-btn" id="downloadBtn">Download Banner</button>
+  </div>
+
+  <div class="banner-preview" id="bannerPreview">
+    <div>
+      <div class="banner-header">
+        <img src="kormoi_jibon.png" alt="কর্মই জীবন" class="logo-top-left" onerror="this.style.display='none'">
+        <img src="bd_gov.png" alt="বাংলাদেশ সরকার" class="logo-top-right" onerror="this.style.display='none'">
+      </div>
+
+      <div class="title-box">
+        <div class="title-sub">তথ্যপ্রযুক্তি জ্ঞানসম্পন্ন যুবদের কৃত্রিম</div>
+        <div class="title-main">বুদ্ধিমত্তা (এআই) প্রযুক্তির মাধ্যমে</div>
+        <div class="title-project">দক্ষতা উন্নয়ন” শীর্ষক প্রকল্প</div>
+      </div>
+
+      <div class="branch-ribbon" id="viewBranchRibbon">LALMONIRHAT BRANCH</div>
+
+      <div class="banner-body">
+        <div class="info-list">
+          
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div class="info-text-group">
+              <span class="info-label">Phone</span>
+              <span class="info-value" id="viewPhone">+8801577724202</span>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="info-icon">👤</div>
+            <div class="info-text-group">
+              <span class="info-label">Name</span>
+              <span class="info-value" id="viewName">HAKIMUL ISLAM</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">💲</div>
+            <div class="info-text-group">
+              <span class="info-label">Total Earned</span>
+              <span class="info-value" id="viewEarned">$30 USD</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">🏅</div>
+            <div class="info-text-group">
+              <span class="info-label">Status</span>
+              <span class="info-value" id="viewStatus">Verified Earning</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">🌐</div>
+            <div class="info-text-group">
+              <span class="info-label">Platform</span>
+              <span class="info-value" id="viewPlatform">fiverr.com</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">📅</div>
+            <div class="info-text-group">
+              <span class="info-label">Batch no</span>
+              <span class="info-value" id="viewBatch">August 24, 2026</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">🤖</div>
+            <div class="info-text-group">
+              <span class="info-label">Achievement</span>
+              <span class="info-value" id="viewAchievement">AI character generated</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="photo-frame">
+          <img id="viewImage" src="https://via.placeholder.com/170x220?text=Upload+Photo" alt="Profile Photo">
+        </div>
+      </div>
+    </div>
+
+    <div class="banner-footer">
+      <div class="partner-logos">
+        <img src="european_it.png" alt="EUROPEAN IT" onerror="this.style.display='none'">
+        <img src="kaizen_it.png" alt="Kaizen IT" onerror="this.style.display='none'">
+        <img src="seo_expate.png" alt="SEO Expate" onerror="this.style.display='none'">
+      </div>
+      <div class="bottom-bar">
+        <img src="location_icon.png" alt="Location" onerror="this.style.display='none'"> 
+        <span id="viewBranchBottom">LALMONIRHAT BRANCH</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Variables for inputs
+    const inputBranch = document.getElementById('inputBranch');
+    const inputPhone = document.getElementById('inputPhone');
+    const inputName = document.getElementById('inputName');
+    const inputEarned = document.getElementById('inputEarned');
+    const inputStatus = document.getElementById('inputStatus');
+    const inputPlatform = document.getElementById('inputPlatform');
+    const inputBatch = document.getElementById('inputBatch');
+    const inputAchievement = document.getElementById('inputAchievement');
+    const inputImage = document.getElementById('inputImage');
+
+    // Variables for views
+    const viewBranchRibbon = document.getElementById('viewBranchRibbon');
+    const viewBranchBottom = document.getElementById('viewBranchBottom');
+    const viewPhone = document.getElementById('viewPhone');
+    const viewName = document.getElementById('viewName');
+    const viewEarned = document.getElementById('viewEarned');
+    const viewStatus = document.getElementById('viewStatus');
+    const viewPlatform = document.getElementById('viewPlatform');
+    const viewBatch = document.getElementById('viewBatch');
+    const viewAchievement = document.getElementById('viewAchievement');
+    const viewImage = document.getElementById('viewImage');
+
+    // Real-time Event Listeners
+    inputBranch.addEventListener('input', (e) => {
+      const val = e.target.value || 'BRANCH NAME';
+      viewBranchRibbon.textContent = val;
+      viewBranchBottom.textContent = val;
+    });
+
+    inputPhone.addEventListener('input', (e) => viewPhone.textContent = e.target.value);
+    inputName.addEventListener('input', (e) => viewName.textContent = e.target.value);
+    inputEarned.addEventListener('input', (e) => viewEarned.textContent = e.target.value);
+    inputStatus.addEventListener('input', (e) => viewStatus.textContent = e.target.value);
+    inputPlatform.addEventListener('input', (e) => viewPlatform.textContent = e.target.value);
+    inputBatch.addEventListener('input', (e) => viewBatch.textContent = e.target.value);
+    inputAchievement.addEventListener('input', (e) => viewAchievement.textContent = e.target.value);
+
+    // Image Upload Handler (Auto converts to base64 for display)
+    inputImage.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          viewImage.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Download Banner Logic using html2canvas
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const bannerElement = document.getElementById('bannerPreview');
+      
+      // html2canvas configuration for high quality download
+      html2canvas(bannerElement, {
+        scale: 2, // Increases resolution of the downloaded image
+        useCORS: true, // Allows cross-origin images (if any external image link is used)
+        backgroundColor: null // Keeps original background color
+      }).then((canvas) => {
+        // Convert canvas to data URL
+        const imageURL = canvas.toDataURL("image/png");
+        
+        // Create an invisible anchor tag to trigger download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = imageURL;
+        downloadLink.download = 'Student_Banner.png';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      });
+    });
+  </script>
+
+</body>
+</html>
