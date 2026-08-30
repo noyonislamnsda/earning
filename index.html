@@ -78,10 +78,19 @@
       background: #aa0000;
     }
 
+    /* Responsive Wrapper for Mobile */
+    .preview-wrapper {
+      width: 100%;
+      max-width: 500px;
+      overflow-x: auto; /* Allows horizontal scrolling on small phones */
+      padding-bottom: 10px;
+    }
+
     /* Banner Card Preview */
     .banner-preview {
       background: #ffffff;
       width: 500px;
+      min-width: 500px; /* Forces exact width so layout NEVER breaks on phone */
       min-height: 720px;
       border-radius: 10px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.15);
@@ -93,7 +102,7 @@
       border: 6px solid #0b5e34;
     }
 
-    /* Banner Header (Original Logos) */
+    /* Banner Header */
     .banner-header {
       display: flex;
       justify-content: space-between;
@@ -188,7 +197,7 @@
       color: #222;
     }
 
-    /* Profile Photo Frame - Image auto adjustment */
+    /* Profile Photo Frame */
     .photo-frame {
       width: 170px;
       height: 220px;
@@ -204,11 +213,11 @@
     .photo-frame img {
       width: 100%;
       height: 100%;
-      object-fit: cover;         /* Fills the container perfectly */
-      object-position: top center; /* Keeps face/head in view */
+      object-fit: cover;         
+      object-position: top center; 
     }
 
-    /* Footer Partners (Original Logos) */
+    /* Footer Partners */
     .banner-footer {
       background: #ffffff;
       border-top: 2px solid #eef2f5;
@@ -297,103 +306,104 @@
     <button class="download-btn" id="downloadBtn">Download</button>
   </div>
 
-  <div class="banner-preview" id="bannerPreview">
-    <div>
-      <div class="banner-header">
-        <img src="kormoi_jibon.png" alt="কর্মই জীবন" class="logo-top-left" onerror="this.style.display='none'">
-        <img src="bd_gov.png" alt="বাংলাদেশ সরকার" class="logo-top-right" onerror="this.style.display='none'">
-      </div>
-
-      <div class="title-box">
-        <div class="title-sub">তথ্যপ্রযুক্তি জ্ঞানসম্পন্ন যুবদের কৃত্রিম</div>
-        <div class="title-main">বুদ্ধিমত্তা (এআই) প্রযুক্তির মাধ্যমে</div>
-        <div class="title-project">দক্ষতা উন্নয়ন” শীর্ষক প্রকল্প</div>
-      </div>
-
-      <div class="branch-ribbon" id="viewBranchRibbon">Pabna Branch</div>
-
-      <div class="banner-body">
-        <div class="info-list">
-          
-          <div class="info-item">
-            <div class="info-icon">📞</div>
-            <div class="info-text-group">
-              <span class="info-label">Phone</span>
-              <span class="info-value" id="viewPhone">+8801315788927</span>
-            </div>
-          </div>
-          
-          <div class="info-item">
-            <div class="info-icon">👤</div>
-            <div class="info-text-group">
-              <span class="info-label">Name</span>
-              <span class="info-value" id="viewName">Noyon Islam</span>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <div class="info-icon">💲</div>
-            <div class="info-text-group">
-              <span class="info-label">Total Earned</span>
-              <span class="info-value" id="viewEarned">$50 USD</span>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <div class="info-icon">🏅</div>
-            <div class="info-text-group">
-              <span class="info-label">Status</span>
-              <span class="info-value" id="viewStatus">Verified Earning</span>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <div class="info-icon">🌐</div>
-            <div class="info-text-group">
-              <span class="info-label">Platform</span>
-              <span class="info-value" id="viewPlatform">fiverr.com</span>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <div class="info-icon">📅</div>
-            <div class="info-text-group">
-              <span class="info-label">Batch no</span>
-              <span class="info-value" id="viewBatch">01</span>
-            </div>
-          </div>
-
-          <div class="info-item">
-            <div class="info-icon">🤖</div>
-            <div class="info-text-group">
-              <span class="info-label">Achievement</span>
-              <span class="info-value" id="viewAchievement">AI character generated</span>
-            </div>
-          </div>
-
+  <div class="preview-wrapper">
+    <div class="banner-preview" id="bannerPreview">
+      <div>
+        <div class="banner-header">
+          <img src="kormoi_jibon.png" alt="????? ????" class="logo-top-left" onerror="this.style.display='none'">
+          <img src="bd_gov.png" alt="???????? ?????" class="logo-top-right" onerror="this.style.display='none'">
         </div>
 
-        <div class="photo-frame">
-          <img id="viewImage" src="https://via.placeholder.com/170x220?text=Upload+Photo" alt="Profile Photo">
+        <div class="title-box">
+          <div class="title-sub">????????????? ???????????? ?????? ???????</div>
+          <div class="title-main">??????????? (???) ?????????? ???????</div>
+          <div class="title-project">?????? ???????” ?????? ???????</div>
+        </div>
+
+        <div class="branch-ribbon" id="viewBranchRibbon">Pabna Branch</div>
+
+        <div class="banner-body">
+          <div class="info-list">
+            
+            <div class="info-item">
+              <div class="info-icon">??</div>
+              <div class="info-text-group">
+                <span class="info-label">Phone</span>
+                <span class="info-value" id="viewPhone">+8801315788927</span>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon">??</div>
+              <div class="info-text-group">
+                <span class="info-label">Name</span>
+                <span class="info-value" id="viewName">Noyon Islam</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">??</div>
+              <div class="info-text-group">
+                <span class="info-label">Total Earned</span>
+                <span class="info-value" id="viewEarned">$50 USD</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">??</div>
+              <div class="info-text-group">
+                <span class="info-label">Status</span>
+                <span class="info-value" id="viewStatus">Verified Earning</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">??</div>
+              <div class="info-text-group">
+                <span class="info-label">Platform</span>
+                <span class="info-value" id="viewPlatform">fiverr.com</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">??</div>
+              <div class="info-text-group">
+                <span class="info-label">Batch no</span>
+                <span class="info-value" id="viewBatch">01</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">??</div>
+              <div class="info-text-group">
+                <span class="info-label">Achievement</span>
+                <span class="info-value" id="viewAchievement">AI character generated</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="photo-frame">
+            <img id="viewImage" src="https://via.placeholder.com/170x220?text=Upload+Photo" alt="Profile Photo">
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="banner-footer">
-      <div class="partner-logos">
-        <img src="european_it.png" alt="EUROPEAN IT" onerror="this.style.display='none'">
-        <img src="kaizen_it.png" alt="Kaizen IT" onerror="this.style.display='none'">
-        <img src="seo_expate.png" alt="SEO Expate" onerror="this.style.display='none'">
-      </div>
-      <div class="bottom-bar">
-        <img src="location_icon.png" alt="Location" onerror="this.style.display='none'"> 
-        <span id="viewBranchBottom">Pabna Branch</span>
+      <div class="banner-footer">
+        <div class="partner-logos">
+          <img src="european_it.png" alt="EUROPEAN IT" onerror="this.style.display='none'">
+          <img src="kaizen_it.png" alt="Kaizen IT" onerror="this.style.display='none'">
+          <img src="seo_expate.png" alt="SEO Expate" onerror="this.style.display='none'">
+        </div>
+        <div class="bottom-bar">
+          <img src="location_icon.png" alt="Location" onerror="this.style.display='none'"> 
+          <span id="viewBranchBottom">Pabna Branch</span>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Variables for inputs
     const inputBranch = document.getElementById('inputBranch');
     const inputPhone = document.getElementById('inputPhone');
     const inputName = document.getElementById('inputName');
@@ -404,7 +414,6 @@
     const inputAchievement = document.getElementById('inputAchievement');
     const inputImage = document.getElementById('inputImage');
 
-    // Variables for views
     const viewBranchRibbon = document.getElementById('viewBranchRibbon');
     const viewBranchBottom = document.getElementById('viewBranchBottom');
     const viewPhone = document.getElementById('viewPhone');
@@ -416,7 +425,6 @@
     const viewAchievement = document.getElementById('viewAchievement');
     const viewImage = document.getElementById('viewImage');
 
-    // Real-time Event Listeners
     inputBranch.addEventListener('input', (e) => {
       const val = e.target.value || 'BRANCH NAME';
       viewBranchRibbon.textContent = val;
@@ -431,7 +439,6 @@
     inputBatch.addEventListener('input', (e) => viewBatch.textContent = e.target.value);
     inputAchievement.addEventListener('input', (e) => viewAchievement.textContent = e.target.value);
 
-    // Image Upload Handler (Auto converts to base64 for display)
     inputImage.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
@@ -443,20 +450,18 @@
       }
     });
 
-    // Download Banner Logic using html2canvas
+    // Updated Download Banner Logic for Mobile Fix
     document.getElementById('downloadBtn').addEventListener('click', () => {
       const bannerElement = document.getElementById('bannerPreview');
       
-      // html2canvas configuration for high quality download
       html2canvas(bannerElement, {
-        scale: 2, // Increases resolution of the downloaded image
-        useCORS: true, // Allows cross-origin images (if any external image link is used)
-        backgroundColor: null // Keeps original background color
+        scale: 3, // High quality resolution for download
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        scrollX: 0, 
+        scrollY: -window.scrollY // The magic fix that prevents cropping on mobile scroll
       }).then((canvas) => {
-        // Convert canvas to data URL
         const imageURL = canvas.toDataURL("image/png");
-        
-        // Create an invisible anchor tag to trigger download
         const downloadLink = document.createElement('a');
         downloadLink.href = imageURL;
         downloadLink.download = 'Student_Banner.png';
